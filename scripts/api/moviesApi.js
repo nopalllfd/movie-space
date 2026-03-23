@@ -1,0 +1,22 @@
+const url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc';
+
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization:
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MmRjZTdlZWFhMzFmMWU3YjE3ZWM0ZDQ1NmRmNzk4OSIsIm5iZiI6MTc1MzM0MDgzNi43Mjg5OTk5LCJzdWIiOiI2ODgxZGJhNDdiMDFmMTA5MjYxNmIzZDEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.6MhOMkvNGecZsGzTb6um2Wr3HBm-zQ7gGZk3mXtdi0I',
+  },
+};
+
+export const fetchMovies = async () => {
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error('Failed to fetch movies');
+    }
+    return response.json();
+  } catch (error) {
+    throw new Error(error);
+  }
+};
