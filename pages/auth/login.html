@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="../../scripts/auth/login.js" defer></script>
+    <script type="module" src="../../scripts/auth/login.js" defer></script>
 </head>
 
 <body>
@@ -17,29 +17,40 @@
         </section>
         <section class="buttons flex gap-8 items-center text-white">
             <a href=""><button class="btn text-sm">ALL FILMS</button></a>
-            <a href=""><button class="btn bg-emerald-500 text-gray-950 rounded px-3 py-1 text-sm font-semibold">LOGIN</button></a>
+            <a href=""><button
+                    class="btn bg-emerald-500 text-gray-950 rounded px-3 py-1 text-sm font-semibold">LOGIN</button></a>
         </section>
     </header>
     <main class="bg-gray-900 flex justify-center items-center h-[calc(100vh-62px)] w-full">
-        <form action="" class="flex flex-col gap-8 items-center w-1/3">
+        <form action="" class="flex flex-col gap-12 items-center w-1/3 relative">
             <section class="icon flex items-center gap-2">
                 <img src="../../assets/icon.svg" alt="moviespace icon">
                 <p class="text-sm font-semibold pbe-1 text-emerald-400">MOVIESPACE</p>
             </section>
-            <section class="flex flex-col input-group text-white gap-8 w-3/4 items-center">
-                <div class="email-input flex flex-col w-full">
-                    <input class="border-b border-gray-500 outline-none py-1 text-white focus:border-emerald-400" type="text" id="email"
-                        placeholder="Email">
+            <section class="alert bg-red-500 text-white rounded p-1 text-xs invisible absolute top-8">
+            </section>
+            <section class="flex flex-col input-group text-white gap-12 w-3/4 items-center">
+                <div class="email-input flex flex-col w-full relative">
+                    <input class="border-b border-gray-500 outline-none py-1 text-white focus:border-emerald-400 "
+                        type="text" id="email" placeholder="Email">
+                    <section id="email-alert" class="text-red-500 rounded text-xs invisible absolute top-10">
+                    </section>
                 </div>
-                <div class="password-input flex flex-col w-full">
-                    <input class="border-b border-gray-500 outline-none py-1 text-white focus:border-emerald-400" type="text" id="password"
-                        placeholder="Password">
+                <div class="password-input flex flex-col w-full relative">
+                    <input class="border-b border-gray-500 outline-none py-1 text-white focus:border-emerald-400"
+                        type="text" id="password" placeholder="Password">
+                    <section id="password-alert" class="text-red-500 rounded text-xs invisible absolute top-10">
+                    </section>
                 </div>
+
                 <div class="submit-button">
-                    <button class="btn bg-emerald-500 px-6 py-2 rounded text-gray-950 font-semibold">Login</button>
+                    <button type="submit"
+                        class="btn bg-emerald-500 px-6 py-2 rounded text-gray-950 font-semibold">Login</button>
                 </div>
             </section>
-            <div class="additional-links text-emerald-400">NEW USER? <a class="underline" href="">REGISTER HERE</a></div>
+            <div class="additional-links text-emerald-400">NEW USER? <a class="underline"
+                    href="./register.html">REGISTER HERE</a>
+            </div>
         </form>
     </main>
 
