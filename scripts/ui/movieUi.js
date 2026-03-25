@@ -7,10 +7,25 @@ export const renderTotalMovies = (totalMovies) => {
   }
 };
 
+export const renderGenreDropdown = async (genres) => {
+  const genreSelect = document.getElementById('genre-select');
+  genreSelect.classList.add('bg-gray-900');
+  if (!genreSelect) return;
+  try {
+    genres.genres.forEach((genre) => {
+      const opt = document.createElement('option');
+      opt.innerText = genre.name;
+      opt.setAttribute('value', `${genre.id}`);
+      opt.classList.add('bg-gray-700', 'text-white');
+      genreSelect.append(opt);
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const renderMovies = (movies, isWatchlistPage = false) => {
   const movieTitleContainer = document.querySelector('.movie-list');
-
-  if (!movieTitleContainer) return;
   movieTitleContainer.innerHTML = '';
 
   const items = movies.map((movie) => {

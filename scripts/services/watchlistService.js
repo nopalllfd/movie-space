@@ -1,4 +1,3 @@
-// File: watchlistService.js
 const STORAGE_KEY = 'tmdb_watchlist';
 
 export const getWatchlist = () => {

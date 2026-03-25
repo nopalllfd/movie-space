@@ -1,9 +1,10 @@
 import { fetchMovies } from '../api/moviesApi.js';
 import { fetchGenres } from '../api/genresApi.js';
 
-export const getMovies = async () => {
+export const getMovies = async (genreId) => {
   try {
-    const [moviesData, genresData] = await Promise.all([fetchMovies(), fetchGenres()]);
+    console.log(genreId);
+    const [moviesData, genresData] = await Promise.all([fetchMovies(genreId), fetchGenres()]);
     const genresMap = genresData.genres.map((genre) => [genre.id, genre.name]);
     const genresObj = Object.fromEntries(genresMap);
     console.log(genresObj);
@@ -22,6 +23,15 @@ export const getMoviesTotal = async () => {
   try {
     const movie = await getMovies();
     return movie.length;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const getGenres = async () => {
+  try {
+    const genre = await fetchGenres();
+    return genre;
   } catch (error) {
     throw new Error(error);
   }
