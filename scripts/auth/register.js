@@ -1,5 +1,6 @@
 import { errorResponse } from './errorResponse.js';
 import { clearInputError } from './clearInputError.js';
+import { response } from '../response/index.js';
 
 const email = document.querySelector('#email');
 const emailAlert = document.querySelector('#email-alert');
@@ -40,6 +41,14 @@ loginForm.addEventListener('submit', (e) => {
   const isFormValid = validateForm();
 
   if (isFormValid) {
-    window.location.href = '../../index.html';
+    const credentials = {
+      email: email.value,
+      password: password.value,
+    };
+    localStorage.setItem('user', JSON.stringify(credentials));
+    response('Berhasil mendaftarkan user', 'green');
+    setTimeout(() => {
+      window.location.href = '../../index.html';
+    }, 1500);
   }
 });

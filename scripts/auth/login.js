@@ -1,5 +1,6 @@
 import { errorResponse } from './errorResponse.js';
 import { clearInputError } from './clearInputError.js';
+import { response } from '../response/index.js';
 
 const email = document.querySelector('#email');
 const emailAlert = document.querySelector('#email-alert');
@@ -27,8 +28,17 @@ clearInputError(password, passwordAlert);
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const isFormValid = validateForm();
-
   if (isFormValid) {
-    window.location.href = '../../index.html';
+    const getUser = JSON.parse(localStorage.getItem('user'));
+    console.log(getUser);
+
+    if (email.value === getUser.email && password.value === getUser.password) {
+      response('Berhasil login', 'green');
+      setTimeout(() => {
+        window.location.href = '../../index.html';
+      }, 1500);
+    } else {
+      response('Gagal login, kredensial salah', 'red');
+    }
   }
 });

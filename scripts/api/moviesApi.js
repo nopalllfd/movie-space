@@ -1,4 +1,4 @@
-const url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc';
+const url = 'https://api.themoviedb.org/3/discover/movie?';
 
 const options = {
   method: 'GET',
@@ -9,13 +9,13 @@ const options = {
   },
 };
 
-export const fetchMovies = async (genreId) => {
+export const fetchMovies = async (genreId, page) => {
   try {
     let finalUrl = url;
     console.log(typeof genreId);
-    if (genreId) {
+    if (genreId || page) {
       console.log('masuk');
-      finalUrl = url + '&with_genres=' + genreId;
+      finalUrl = url + '&with_genres=' + genreId + '&page=' + page;
     }
     console.log(finalUrl);
     const response = await fetch(finalUrl, options);

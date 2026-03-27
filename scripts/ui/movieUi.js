@@ -1,3 +1,4 @@
+import { response } from '../response/index.js';
 import { isMovieInWatchlist, toggleWatchlist } from '../services/watchlistService.js';
 
 export const renderTotalMovies = (totalMovies) => {
@@ -106,6 +107,7 @@ export const renderMovies = (movies, isWatchlistPage = false) => {
       if (isWatchlistPage) {
         setTimeout(() => {
           list.remove();
+          response('Berhasil menghapus film dari watchlist', 'red');
           return;
         }, 500);
       }
@@ -115,8 +117,10 @@ export const renderMovies = (movies, isWatchlistPage = false) => {
       addWatchlistButton.classList.toggle('hover:text-white');
 
       if (addWatchlistButton.innerText === 'ADD TO WATCHLIST') {
+        response('Berhasil menambahkan film ke watchlist', 'green');
         addWatchlistButton.innerText = 'REMOVE FROM WATCHLIST';
       } else {
+        response('Berhasil menghapus film dari watchlist', 'red');
         addWatchlistButton.innerText = 'ADD TO WATCHLIST';
       }
     });
@@ -129,4 +133,41 @@ export const renderMovies = (movies, isWatchlistPage = false) => {
   });
 
   movieTitleContainer.append(...items);
+};
+
+export const renderPagination = (pages, onPageClick) => {
+  const pagination = document.querySelector('.pagination');
+  pagination.classList.add('flex', 'gap-4', 'list-none');
+  pagination.innerHTML = '';
+
+  for (let i = 1; i <= pages; i++) {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+
+    if (i === 1) {
+      li.classList.add('bg-white', 'text-gray-800');
+    } else {
+      li.classList.add('bg-gray-800', 'text-white');
+    }
+
+    li.classList.add('py-1', 'px-2', 'border', 'cursor-pointer');
+    li.setAttribute('data-page', i);
+    a.innerText = i;
+
+    li.addEventListener('click', (e) => {
+      pagination.querySelectorAll('li').forEach((item) => {
+        item.classList.remove('bg-white', 'text-gray-800');
+        item.classList.add('bg-gray-800', 'text-white');
+      });
+
+      li.classList.remove('bg-gray-800', 'text-white');
+      li.classList.add('bg-white', 'text-gray-800');
+
+      const selectedPage = e.currentTarget.getAttribute('data-page');
+      if (onPageClick) onPageClick(selectedPage);
+    });
+
+    li.append(a);
+    pagination.append(li);
+  }
 };
