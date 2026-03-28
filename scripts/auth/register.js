@@ -36,19 +36,36 @@ clearInputError(email, emailAlert);
 clearInputError(password, passwordAlert);
 clearInputError(confirmPassword, confirmPasswordAlert);
 
+const isEmailExist = () => {
+  const emailInput = email.value;
+  const existingEmail = JSON.parse(localStorage.getItem('user')).email;
+  console.log(existingEmail);
+  if (emailInput == existingEmail) {
+    errorResponse(emailAlert, email, 'Email telah terdaftar');
+    return true;
+  }
+  return false;
+};
+
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const isFormValid = validateForm();
 
   if (isFormValid) {
-    const credentials = {
-      email: email.value,
-      password: password.value,
-    };
-    localStorage.setItem('user', JSON.stringify(credentials));
-    response('Berhasil mendaftarkan user', 'green');
-    setTimeout(() => {
-      window.location.href = '../../index.html';
-    }, 1500);
+    const existingEmailCheck = isEmailExist();
+    if (!existingEmailCheck) {
+      console.log(isEmailExist());
+      const credentials = {
+        email: email.value,
+        password: password.value,
+      };
+      localStorage.setItem('user', JSON.stringify(credentials));
+      response('Berhasil mendaftarkan user', 'green');
+      setTimeout(() => {
+        window.location.href = '../../index.html';
+      }, 1500);
+    } else {
+      return;
+    }
   }
 });

@@ -36,6 +36,7 @@ loginForm.addEventListener('submit', (e) => {
       response('Berhasil login', 'green');
       setTimeout(() => {
         window.location.href = '../../index.html';
+        localStorage.setItem('isLogin', 'yes');
       }, 1500);
     } else {
       response('Gagal login, kredensial salah', 'red');

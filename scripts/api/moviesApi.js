@@ -15,7 +15,7 @@ export const fetchMovies = async (genreId, page) => {
     console.log(typeof genreId);
     if (genreId || page) {
       console.log('masuk');
-      finalUrl = url + '&with_genres=' + genreId + '&page=' + page;
+      finalUrl = url + 'with_genres=' + genreId + '&page=' + page;
     }
     console.log(finalUrl);
     const response = await fetch(finalUrl, options);
