@@ -21,7 +21,8 @@ export const getMovies = async (genreId, page) => {
 export const getMoviesTotal = async () => {
   try {
     const movie = await getMovies();
-    return movie.length;
+    const totalPages = await getPagination();
+    return movie.length * totalPages;
   } catch (error) {
     throw new Error(error);
   }

@@ -11,16 +11,21 @@
 </head>
 
 <body>
-    <header class="flex justify-between px-20 py-4 bg-gray-950 border-b-2 border-emerald-600">
+    <header
+        class="flex flex-col sm:flex-row justify-between items-center gap-4 px-4 py-4 md:px-10 lg:px-20 bg-gray-950 border-b-2 border-emerald-600 relative">
         <section class="icon flex items-center gap-2">
             <img src="../../assets/icon.svg" alt="moviespace icon">
             <p class="text-sm font-semibold pbe-1 text-emerald-400">MOVIESPACE</p>
         </section>
-        <section class="buttons flex gap-8 items-center text-white">
-            <a href="../../index.html"><button class="btn text-sm cursor-pointer">ALL FILMS</button></a>
-            <a href="./pages/watchlist/index.html"><button class="btn text-sm cursor-pointer">MY WATCHLIST</button></a>
-            <a href="./pages/auth/login.html"><button
-                    class="btn bg-emerald-500 text-gray-950 rounded px-3 py-1 text-sm font-semibold">LOGIN</button></a>
+        <section class="buttons-nav flex flex-wrap justify-center gap-4 md:gap-8 items-center text-white">
+            <a href="../../index.html"><button
+                    class="btn text-xs sm:text-sm cursor-pointer hover:border-b-2 transition-all duration-50 w-18 border-emerald-600">ALL
+                    FILMS</button></a>
+            <a href="../watchlist/index.html"><button
+                    class="btn text-xs sm:text-sm cursor-pointer  hover:border-b-2 transition-all text-emerald-400  duration-50 w-26 border-emerald-600">MY
+                    WATCHLIST</button></a>
+            <a id="login-link" href="../auth/login.html"><button id="login-button"
+                    class="btn bg-emerald-500 text-gray-950 rounded px-3 py-1 text-xs sm:text-sm font-semibold">LOGIN</button></a>
         </section>
     </header>
     <main

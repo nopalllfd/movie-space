@@ -109,7 +109,6 @@ export const renderMovies = (movies, isWatchlistPage = false) => {
       if (isWatchlistPage) {
         setTimeout(() => {
           list.remove();
-          response('Berhasil menghapus film dari watchlist', 'red');
           return;
         }, 500);
       }
@@ -133,44 +132,48 @@ export const renderMovies = (movies, isWatchlistPage = false) => {
     return list;
   });
 
+  if (items.length == 0 && isWatchlistPage) {
+    const noContentText = document.createElement('p');
+    noContentText.textContent = 'Tidak ada film di watchlist anda';
+    noContentText.classList.add('text-gray-300');
+    movieTitleContainer.append(noContentText);
+  }
+
   movieTitleContainer.append(...items);
 };
 
-export const renderPagination = (pages, onPageClick) => {
+export const renderPagination = (totalItems, itemsPerPage, currentPage, onPageClick) => {
   const pagination = document.querySelector('.pagination');
-  pagination.classList.add('flex', 'gap-4', 'list-none', 'w-full', 'justify-end');
+  pagination.classList.add('flex', 'items-center', 'gap-6', 'text-sm', 'text-gray-400', 'justify-end', 'p-4');
   pagination.innerHTML = '';
 
-  for (let i = 1; i <= pages; i++) {
-    const li = document.createElement('li');
-    const a = document.createElement('a');
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startItem = (currentPage - 1) * itemsPerPage + 1;
+  const endItem = Math.min(currentPage * itemsPerPage, totalItems);
 
-    if (i === 1) {
-      li.classList.add('bg-white', 'text-gray-800');
-    } else {
-      li.classList.add('bg-gray-800', 'text-white');
-    }
+  const labelPerPage = document.createElement('div');
+  labelPerPage.innerHTML = `items per page: <span class="text-white ml-2">${itemsPerPage}</span>`;
 
-    li.classList.add('py-1', 'px-2', 'border', 'cursor-pointer');
-    li.setAttribute('data-page', i);
-    a.innerText = i;
+  const rangeLabel = document.createElement('div');
+  rangeLabel.innerText = `${startItem} - ${endItem} of ${totalItems}`;
 
-    li.addEventListener('click', (e) => {
-      pagination.querySelectorAll('li').forEach((item) => {
-        item.classList.remove('bg-white', 'text-gray-800');
-        item.classList.add('bg-gray-800', 'text-white');
-      });
+  const navAction = document.createElement('div');
+  navAction.classList.add('flex', 'gap-8');
 
-      li.classList.remove('bg-gray-800', 'text-white');
-      li.classList.add('bg-white', 'text-gray-800');
+  const btnPrev = document.createElement('button');
+  btnPrev.innerHTML = `&#10094;`;
+  btnPrev.className = `hover:text-white transition ${currentPage === 1 ? 'opacity-20 cursor-not-allowed' : 'cursor-pointer'}`;
+  btnPrev.disabled = currentPage === 1;
+  btnPrev.onclick = () => currentPage > 1 && onPageClick(currentPage - 1);
 
-      const selectedPage = e.currentTarget.getAttribute('data-page');
-      if (onPageClick) onPageClick(selectedPage);
-    });
+  const btnNext = document.createElement('button');
+  btnNext.innerHTML = `&#10095;`;
+  btnNext.className = `hover:text-white transition ${currentPage === totalPages ? 'opacity-20 cursor-not-allowed' : 'cursor-pointer'}`;
+  btnNext.disabled = currentPage === totalPages;
+  btnNext.onclick = () => currentPage < totalPages && onPageClick(currentPage + 1);
 
-    li.append(a);
-    pagination.append(li);
-  }
+  navAction.append(btnPrev, btnNext);
+  pagination.append(labelPerPage, rangeLabel, navAction);
 };
 
 export const loading = () => {

@@ -11,16 +11,19 @@
 
 <body>
     <header
-        class="flex flex-col sm:flex-row justify-between items-center gap-4 px-4 py-4 md:px-10 lg:px-20 bg-gray-950 border-b-2 border-emerald-600">
+        class="flex flex-col sm:flex-row justify-between items-center gap-4 px-4 py-4 md:px-10 lg:px-20 bg-gray-950 border-b-2 border-emerald-600 relative">
         <section class="icon flex items-center gap-2">
             <img src="../../assets/icon.svg" alt="moviespace icon">
             <p class="text-sm font-semibold pbe-1 text-emerald-400">MOVIESPACE</p>
         </section>
-        <section class="buttons flex flex-wrap justify-center gap-4 md:gap-8 items-center text-white">
-            <a href=""><button class="btn text-xs sm:text-sm">ALL FILMS</button></a>
-            <a href="./pages/watchlist/index.html"><button class="btn text-xs sm:text-sm cursor-pointer">MY
+        <section class="buttons-nav flex flex-wrap justify-center gap-4 md:gap-8 items-center text-white">
+            <a class="" href=""><button
+                    class="btn text-xs sm:text-sm hover:border-b-2 transition-all text-emerald-400  duration-50 w-18 border-emerald-600">ALL
+                    FILMS</button></a>
+            <a href="./pages/watchlist/index.html"><button
+                    class="btn text-xs sm:text-sm cursor-pointer hover:border-b-2 border-emerald-600 transition-all duration-50">MY
                     WATCHLIST</button></a>
-            <a href="./pages/auth/login.html"><button id="login-button"
+            <a id="login-link" href="./pages/auth/login.html"><button id="login-button"
                     class="btn bg-emerald-500 text-gray-950 rounded px-3 py-1 text-xs sm:text-sm font-semibold">LOGIN</button></a>
         </section>
     </header>
@@ -32,7 +35,7 @@
         <div class="filter flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <select class="text-xs border-2 rounded-full py-2 px-3 outline-none w-full sm:w-auto" name="genre"
                 id="genre-select">
-                <option value="" disabled selected>GENRE</option>
+                <option value="">ALL GENRES</option>
             </select>
             <select class="text-xs border-2 rounded-full py-2 px-3 outline-none w-full sm:w-auto" name="" id="">
                 <option value="" disabled selected>SORT BY IMDB</option>
@@ -44,7 +47,7 @@
             </ul>
         </div>
 
-        <div class="pagination w-full flex justify-center sm:justify-start">
+        <div class="pagination w-full flex justify-center sm:justify-end">
             <nav class="navigation">
             </nav>
         </div>
