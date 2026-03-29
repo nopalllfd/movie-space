@@ -104,26 +104,40 @@ export const renderMovies = (movies, isWatchlistPage = false) => {
       addWatchlistButton.classList.add('hover:bg-gray-800');
     }
 
+    const updateWatchlistButtonStyle = (exists) => {
+      addWatchlistButton.classList.remove('bg-gray-800', 'text-white', 'hover:text-gray-800', 'hover:bg-white');
+      addWatchlistButton.classList.remove('bg-white', 'text-gray-800', 'hover:text-white');
+
+      if (exists) {
+        if (isWatchlistPage) {
+          addWatchlistButton.classList.add('bg-gray-800', 'border', 'text-white', 'hover:text-gray-800', 'hover:bg-white');
+        } else {
+          addWatchlistButton.classList.add('bg-white', 'text-gray-800', 'hover:text-white');
+        }
+      } else {
+        addWatchlistButton.classList.add('hover:bg-gray-800');
+      }
+    };
+
     addWatchlistButton.addEventListener('click', () => {
-      toggleWatchlist(movie);
-      if (isWatchlistPage) {
-        setTimeout(() => {
-          list.remove();
-          return;
-        }, 500);
+      const result = toggleWatchlist(movie);
+      if (result === null) return;
+
+      isExist = result;
+
+      if (isWatchlistPage && !isExist) {
+        setTimeout(() => list.remove(), 500);
+        return;
       }
 
-      addWatchlistButton.classList.toggle('bg-white');
-      addWatchlistButton.classList.toggle('text-gray-800');
-      addWatchlistButton.classList.toggle('hover:text-white');
-
-      if (addWatchlistButton.innerText === 'ADD TO WATCHLIST') {
+      if (isExist) {
         response('Berhasil menambahkan film ke watchlist', 'green');
         addWatchlistButton.innerText = 'REMOVE FROM WATCHLIST';
       } else {
         response('Berhasil menghapus film dari watchlist', 'red');
         addWatchlistButton.innerText = 'ADD TO WATCHLIST';
       }
+      updateWatchlistButtonStyle(isExist);
     });
 
     buttonContainer.append(detailsButton, addWatchlistButton);

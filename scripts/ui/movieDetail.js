@@ -101,9 +101,10 @@ export const renderDetailMovie = (movie) => {
 
   addWatchlistButton.addEventListener('click', () => {
     if (typeof toggleWatchlist === 'function') {
-      toggleWatchlist(movie);
+      const result = toggleWatchlist(movie);
+      if (result === null) return;
+      isExist = result;
     }
-    isExist = !isExist;
     updateButtonState(isExist);
   });
 

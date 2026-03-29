@@ -9,5 +9,6 @@ export const isLogin = () => {
 
 export const userLogout = (route) => {
   localStorage.setItem('isLogin', 'no');
+  localStorage.removeItem('tmdb_watchlist')
   return (window.location.href = route);
 };
