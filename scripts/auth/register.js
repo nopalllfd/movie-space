@@ -1,6 +1,9 @@
 import { errorResponse } from './errorResponse.js';
 import { clearInputError } from './clearInputError.js';
 import { response } from '../response/index.js';
+import { initResponsiveNav } from '../ui/responsiveNav.js';
+
+initResponsiveNav();
 
 const email = document.querySelector('#email');
 const emailAlert = document.querySelector('#email-alert');
@@ -38,8 +41,13 @@ clearInputError(confirmPassword, confirmPasswordAlert);
 
 const isEmailExist = () => {
   const emailInput = email.value;
-  const existingEmail = JSON.parse(localStorage.getItem('user')).email;
-  console.log(existingEmail);
+  const existingUserRaw = localStorage.getItem('user');
+  if (!existingUserRaw) return false;
+
+  const existingUser = JSON.parse(existingUserRaw);
+  if (!existingUser || !existingUser.email) return false;
+
+  const existingEmail = existingUser.email;
   if (emailInput == existingEmail) {
     errorResponse(emailAlert, email, 'Email telah terdaftar');
     return true;
@@ -54,7 +62,6 @@ loginForm.addEventListener('submit', (e) => {
   if (isFormValid) {
     const existingEmailCheck = isEmailExist();
     if (!existingEmailCheck) {
-      console.log(isEmailExist());
       const credentials = {
         email: email.value,
         password: password.value,
@@ -62,7 +69,7 @@ loginForm.addEventListener('submit', (e) => {
       localStorage.setItem('user', JSON.stringify(credentials));
       response('Berhasil mendaftarkan user', 'green');
       setTimeout(() => {
-        window.location.href = '../../index.html';
+        window.location.href = './login.html';
       }, 1500);
     } else {
       return;

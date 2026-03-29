@@ -10,26 +10,27 @@
 </head>
 
 <body>
-    <header class="flex justify-between px-20 py-4 bg-gray-950 border-b-2 border-emerald-600">
+    <header
+        class="sticky top-0 z-50 flex justify-between items-center gap-4 px-20 max-sm:px-4 py-4 md:px-10 lg:px-20 bg-gray-950 border-b-2 border-emerald-600 relative">
         <section class="icon flex items-center gap-2">
             <img src="../../assets/icon.svg" alt="moviespace icon">
             <p class="text-sm font-semibold pbe-1 text-emerald-400">MOVIESPACE</p>
         </section>
-        <section class="buttons flex gap-8 items-center text-white">
+        <section class="buttons flex gap-8 items-center text-white max-sm:hidden">
             <a href="../../index.html"><button class="btn text-sm">ALL FILMS</button></a>
             <a href="./login.html"><button
                     class="btn bg-emerald-500 text-gray-950 rounded px-3 py-1 text-sm font-semibold">LOGIN</button></a>
         </section>
     </header>
-    <main class="bg-gray-900 flex justify-center items-center h-[calc(100vh-62px)] w-full">
-        <form action="" class="flex flex-col gap-12 items-center w-1/3 relative">
+    <main class="bg-gray-900 flex justify-center items-center h-[calc(100vh-62px)] w-full max-sm:px-4">
+        <form action="" class="flex flex-col gap-12 items-center w-1/3 max-sm:w-full max-sm:max-w-md relative">
             <section class="icon flex items-center gap-2">
                 <img src="../../assets/icon.svg" alt="moviespace icon">
                 <p class="text-sm font-semibold pbe-1 text-emerald-400">MOVIESPACE</p>
             </section>
             <section class="alert bg-red-500 text-white rounded p-1 text-xs invisible absolute top-8">
             </section>
-            <section class="flex flex-col input-group text-white gap-12 w-3/4 items-center">
+            <section class="flex flex-col input-group text-white gap-12 w-3/4 max-sm:w-full items-center">
                 <div class="email-input flex flex-col w-full relative">
                     <input class="border-b border-gray-500 outline-none py-1 text-white focus:border-emerald-400 "
                         type="email" id="email" placeholder="Email">
