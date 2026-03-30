@@ -1,1 +1,1 @@
-* LINK DEPLOY = https://movie-space-six-iota.vercel.app/
+LINK DEPLOY = https://movie-space-six-iota.vercel.app/

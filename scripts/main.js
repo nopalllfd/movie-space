@@ -1,7 +1,6 @@
 import { getMoviesTotal, getMovies, getGenres, getPagination } from './services/moviesService.js';
 import { renderLoginButton } from './ui/headerUi.js';
 import { renderTotalMovies, renderMovies, renderGenreDropdown, renderPagination, loading, stopLoading } from './ui/movieUi.js';
-import { initResponsiveNav } from './ui/responsiveNav.js';
 
 const genreSelect = document.getElementById('genre-select');
 const ITEMS_PER_PAGE = 20;
@@ -25,7 +24,6 @@ const updateContent = async (genreId = '', page = 1) => {
 };
 
 const init = async () => {
-  initResponsiveNav();
   renderLoginButton('./pages/auth/login.html');
   loading();
 

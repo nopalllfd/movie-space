@@ -1,9 +1,6 @@
 import { errorResponse } from './errorResponse.js';
 import { clearInputError } from './clearInputError.js';
 import { response } from '../response/index.js';
-import { initResponsiveNav } from '../ui/responsiveNav.js';
-
-initResponsiveNav();
 
 const email = document.querySelector('#email');
 const emailAlert = document.querySelector('#email-alert');

@@ -10,6 +10,8 @@ export const renderLoginButton = (loginPagePath) => {
     const modalContainer = document.createElement('div');
 
     const buttonContainer = document.querySelector('.buttons-nav');
+    const mobileLoginLink = document.getElementById('mobile-login-link');
+    const mobileLogoutButton = document.getElementById('mobile-logout-button');
     img.setAttribute('src', 'https://i.postimg.cc/6pxz26Rm/foto-selfi.jpg');
     profileIcon.classList.add('w-10', 'h-10', 'rounded-full', 'object-cover');
     img.classList.add('rounded-full', 'w-10', 'h-10', 'object-cover', 'cursor-pointer');
@@ -28,6 +30,11 @@ export const renderLoginButton = (loginPagePath) => {
       img.addEventListener('click', () => {
         modalContainer.classList.toggle('hidden');
       });
+      if (mobileLoginLink) mobileLoginLink.hidden = true;
+      if (mobileLogoutButton) {
+        mobileLogoutButton.hidden = false;
+        mobileLogoutButton.addEventListener('click', () => userLogout(loginPagePath));
+      }
     }
   }
 };

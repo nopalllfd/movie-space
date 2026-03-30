@@ -1,5 +1,5 @@
 import { response } from '../response/index.js';
-import { isMovieInWatchlist, toggleWatchlist } from '../services/watchlistService.js';
+import { isMovieInWatchlist, toggleWatchlist, watchlistTotal } from '../services/watchlistService.js';
 
 export const renderTotalMovies = (totalMovies) => {
   const totalMoviesText = document.querySelector('.title .moviesTotal');
@@ -28,6 +28,12 @@ export const renderGenreDropdown = async (genres) => {
 export const renderMovies = (movies, isWatchlistPage = false) => {
   const movieTitleContainer = document.querySelector('.movie-list');
   movieTitleContainer.innerHTML = '';
+
+  if (isWatchlistPage) {
+    const totalMoviesInWatchlist = watchlistTotal();
+    const totalMoviesInPage = document.querySelector('.moviesTotal');
+    totalMoviesInPage.textContent = totalMoviesInWatchlist;
+  }
 
   const items = movies.map((movie) => {
     const list = document.createElement('li');
@@ -122,11 +128,20 @@ export const renderMovies = (movies, isWatchlistPage = false) => {
     addWatchlistButton.addEventListener('click', () => {
       const result = toggleWatchlist(movie);
       if (result === null) return;
-
       isExist = result;
 
       if (isWatchlistPage && !isExist) {
-        setTimeout(() => list.remove(), 500);
+        setTimeout(() => {
+          list.remove();
+          const totalMoviesInWatchlist = watchlistTotal();
+          const totalMoviesInPage = document.querySelector('.moviesTotal');
+          totalMoviesInPage.textContent = totalMoviesInWatchlist;
+          const noContentText = document.createElement('p');
+          noContentText.textContent = 'Tidak ada film di watchlist anda';
+          noContentText.classList.add('text-gray-300');
+          movieTitleContainer.append(noContentText);
+        }, 500);
+
         return;
       }
 

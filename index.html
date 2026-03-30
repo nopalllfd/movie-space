@@ -24,7 +24,33 @@
                     class="btn text-xs sm:text-sm cursor-pointer hover:border-b-2 border-emerald-600 transition-all duration-50">MY
                     WATCHLIST</button></a>
             <a id="login-link" href="./pages/auth/login.html"><button id="login-button"
-                    class="btn bg-emerald-500 text-gray-950 rounded px-3 py-1 text-xs sm:text-sm font-semibold">LOGIN</button></a>
+                    class="btn cursor-pointer bg-emerald-500 text-gray-950 rounded px-3 py-1 text-xs sm:text-sm font-semibold">LOGIN</button></a>
+        </section>
+        <section class="sm:hidden w-full flex justify-end">
+            <details class="relative">
+                <summary
+                    class="cursor-pointer list-none inline-flex items-center justify-center p-2 rounded-md border border-emerald-600 text-emerald-400 transition-colors duration-150 hover:bg-emerald-500/10 hover:border-emerald-400 active:bg-emerald-500/20 focus:outline-none focus:ring-2 focus:ring-emerald-500/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </summary>
+                <nav
+                    class="absolute right-0 mt-2 w-56 bg-gray-950 border-b-2 border-emerald-600 shadow-lg rounded-lg overflow-hidden text-white">
+                    <a href="./index.html"
+                        class="block px-4 py-3 text-sm text-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-200">ALL
+                        FILMS</a>
+                    <a href="./pages/watchlist/index.html"
+                        class="block px-4 py-3 text-sm hover:bg-emerald-500/10 hover:text-emerald-200">MY
+                        WATCHLIST</a>
+                    <a id="mobile-login-link" href="./pages/auth/login.html"
+                        class="block px-4 py-3 text-sm hover:bg-emerald-500/10 hover:text-emerald-200"><span
+                            id="mobile-login-button">LOGIN</span></a>
+                    <button id="mobile-logout-button" hidden
+                        class="w-full text-left px-4 py-3 text-sm hover:bg-red-600 hover:border-red-400 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500/60">LOGOUT</button>
+                </nav>
+            </details>
         </section>
     </header>
 
@@ -33,13 +59,21 @@
         <h1 class="title text-2xl md:text-4xl font-bold">All Films (<span class="moviesTotal"></span>)</h1>
 
         <div class="filter flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <select class="text-xs border-2 rounded-full py-2 px-3 outline-none w-full sm:w-auto" name="genre"
-                id="genre-select">
-                <option value="">ALL GENRES</option>
-            </select>
-            <select class="text-xs border-2 rounded-full py-2 px-3 outline-none w-full sm:w-auto" name="" id="">
-                <option value="" disabled selected>SORT BY IMDB</option>
-            </select>
+            <div
+                class="flex flex-row-reverse justify-between text-xs border-2 p-2 px-6 relative rounded-full outline-none w-full sm:w-auto">
+                <img src="./assets/filtering/arrow_drop_down.svg" class="w-3 " alt="">
+                <select class="appearance-none outline-none" name="genre" id="genre-select">
+                    <option value="">ALL GENRES</option>
+                </select>
+            </div>
+            <div
+                class="flex flex-row-reverse justify-between text-xs border-2 p-2 px-6 relative rounded-full outline-none w-full sm:w-auto">
+                <img src="./assets/filtering/swap_vert.svg" class="w-3 " alt="">
+                <select class="appearance-none outline-none px-3" name="genre" id="sort-by-tmdb-select">
+                    <option value="">SORT BY TMDB</option>
+                </select>
+            </div>
+
         </div>
 
         <div class="movies w-full">

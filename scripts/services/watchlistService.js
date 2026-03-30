@@ -1,5 +1,5 @@
-import { response } from "../response/index.js";
-import { isLogin } from "./authorizeService.js";
+import { response } from '../response/index.js';
+import { isLogin } from './authorizeService.js';
 
 const STORAGE_KEY = 'tmdb_watchlist';
 
@@ -33,4 +33,10 @@ export const toggleWatchlist = (movie) => {
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(currentWatchlist));
   return isAdded;
+};
+
+export const watchlistTotal = () => {
+  const watchlistAll = getWatchlist();
+  const total = watchlistAll.length;
+  return total;
 };
