@@ -25,6 +25,19 @@ export const renderGenreDropdown = async (genres) => {
   }
 };
 
+export const renderSortByOptions = (sortByOpts) => {
+  const sortSelect = document.querySelector('#sort-by-tmdb-select');
+  const data = sortByOpts;
+  data.forEach((sort) => {
+    const opt = document.createElement('option');
+    opt.textContent = sort;
+    opt.setAttribute('value', sort);
+    opt.classList.add('bg-gray-700', 'text-white');
+    sortSelect.append(opt);
+  });
+  console.log(data);
+};
+
 export const renderMovies = (movies, isWatchlistPage = false) => {
   const movieTitleContainer = document.querySelector('.movie-list');
   movieTitleContainer.innerHTML = '';

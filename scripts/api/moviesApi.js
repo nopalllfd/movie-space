@@ -9,13 +9,13 @@ const options = {
   },
 };
 
-export const fetchMovies = async (genreId, page) => {
+export const fetchMovies = async (genreId, page, sortBy) => {
   try {
     let finalUrl = url;
     console.log(typeof genreId);
     if (genreId || page) {
       console.log('masuk');
-      finalUrl = url + 'with_genres=' + genreId + '&page=' + page;
+      finalUrl = url + 'with_genres=' + genreId + '&page=' + page + '&sortBy=' + sortBy;
     }
     console.log(finalUrl);
     const response = await fetch(finalUrl, options);

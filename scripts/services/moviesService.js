@@ -1,10 +1,10 @@
 import { fetchMovies } from '../api/moviesApi.js';
 import { fetchGenres } from '../api/genresApi.js';
 
-export const getMovies = async (genreId, page) => {
+export const getMovies = async (genreId, page, sortBy) => {
   try {
     console.log(genreId);
-    const [moviesData, genresData] = await Promise.all([fetchMovies(genreId, page), fetchGenres()]);
+    const [moviesData, genresData] = await Promise.all([fetchMovies(genreId, page, sortBy), fetchGenres()]);
     const genresMap = genresData.genres.map((genre) => [genre.id, genre.name]);
     const genresObj = Object.fromEntries(genresMap);
     console.log(genresObj);
@@ -48,4 +48,24 @@ export const getPagination = async () => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+export const getSortByOptions = () => {
+  const rawData = {
+    popularityDesc: 'popularity.desc',
+    popularityAsc: 'popularity.asc',
+    releaseDateDesc: 'primary_release_date.desc',
+    releaseDateAsc: 'primary_release_date.asc',
+    revenueDesc: 'revenue.desc',
+    revenueAsc: 'revenue.asc',
+    voteAverageDesc: 'vote_average.desc',
+    voteAverageAsc: 'vote_average.asc',
+    voteCountDesc: 'vote_count.desc',
+    voteCountAsc: 'vote_count.asc',
+    originalTitleDesc: 'original_title.desc',
+    originalTitleAsc: 'original_title.asc',
+  };
+
+  const data = Object.values(rawData);
+  return data;
 };
