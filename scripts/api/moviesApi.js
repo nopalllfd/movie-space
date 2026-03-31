@@ -13,7 +13,7 @@ export const fetchMovies = async (genreId, page, sortBy) => {
   try {
     let finalUrl = url;
     console.log(typeof genreId);
-    if (genreId || page) {
+    if (genreId || page || sortBy) {
       console.log('masuk');
       finalUrl = url + 'with_genres=' + genreId + '&page=' + page + '&sortBy=' + sortBy;
     }
